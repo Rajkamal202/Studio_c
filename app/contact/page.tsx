@@ -14,7 +14,9 @@ import { PageHeader } from "@/components/page-header"
 import { FadeIn } from "@/components/fade-in"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useToast } from "@/hooks/use-toast"
+
+import { toast } from "sonner"
+
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -26,7 +28,8 @@ const formSchema = z.object({
 
 export default function ContactPage() {
   const searchParams = useSearchParams()
-  const { toast } = useToast()
+
+
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const defaultService = searchParams.get("service") || ""
@@ -51,10 +54,12 @@ export default function ContactPage() {
     setIsSubmitting(false)
     form.reset()
 
-    toast({
-      title: "Message sent!",
+    toast("Message sent!", {
       description: "We'll get back to you as soon as possible.",
-    })
+      duration: 3000, // 3 seconds
+    });
+    
+    
   }
 
   const contactInfo = [
