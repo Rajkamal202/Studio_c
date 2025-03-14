@@ -22,12 +22,12 @@ export default function CouponClaimForm() {
 
       if (result.success) {
         setStatus("success")
-        setCoupon(result.coupon)
-        setMessage(result.message)
+        setCoupon(result.coupon ?? null)
+        setMessage(result.message ?? "An error occured")
       } else if (result.timeRemaining) {
         setStatus("timeout")
         setTimeRemaining(result.timeRemaining)
-        setMessage(result.message)
+        setMessage(result.message ?? "An error occured")
       } else {
         setStatus("error")
         setMessage(result.message || "An error occurred while claiming your coupon.")
